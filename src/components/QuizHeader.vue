@@ -4,7 +4,7 @@ const { questionStatus, barPercentage } = defineProps([
   'barPercentage',
 ]);
 
-console.log(barPercentage);
+const emit = defineEmits(['selectOption']);
 </script>
 
 <template>

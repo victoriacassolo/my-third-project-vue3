@@ -27,6 +27,10 @@ const questionStatus = computed(
 const barPercentage = computed(
   () => `${(currentQuestionIndex.value / quiz.questions.length) * 100}%`
 );
+
+const onOptionSelected = (isCorrect) => {
+  console.log('EMITTED EVENT', isCorrect);
+};
 </script>
 
 <template>
@@ -35,17 +39,12 @@ const barPercentage = computed(
       :questionStatus="questionStatus"
       :barPercentage="barPercentage"
     />
-    <div><Question :question="quiz.questions[currentQuestionIndex]" /></div>
-    <button
-      @click="
-        {
-          currentQuestionIndex < quiz.questions.length
-            ? currentQuestionIndex++
-            : (button.disabled = true);
-        }
-      "
-    >
-      Next Question
-    </button>
+    <div>
+      <Question
+        :question="quiz.questions[currentQuestionIndex]"
+        @selectOption="onOptionSelected"
+      />
+    </div>
+    <button @click="currentQuestionIndex++">Next Question</button>
   </div>
 </template>
